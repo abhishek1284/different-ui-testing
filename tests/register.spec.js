@@ -7,14 +7,11 @@ test.describe("Registration Scenarios", () => {
       waitUntil: "domcontentloaded",
       timeout: 60000,
     });
-
-    // Step 2: Open Register page
     const registerLink = page.locator("a.ico-register");
     await registerLink.waitFor({ state: "visible", timeout: 10000 });
     await registerLink.click();
     await expect(page).toHaveURL(/register/);
 
-    // Step 3: Fill registration form with unique email
     await page.locator("#gender-male").check();
     await page.locator("#FirstName").fill("Abhishek");
     await page.locator("#LastName").fill("Pradhan");
@@ -25,16 +22,15 @@ test.describe("Registration Scenarios", () => {
     await page.locator("#ConfirmPassword").fill(password);
 
     await page.locator('input[name="register-button"]').click()
-    // Step 5: Verify success
+
     await expect(page.locator(".result")).toHaveText("Your registration completed");
     await expect(page.locator("a.ico-logout")).toBeVisible();
 
-    // Step 6: Keep dashboard visible for 5 seconds
     await page.waitForTimeout(5000);
   });
 
   test("Register with duplicate email shows error", async ({ page }) => {
-    // Step 1: Go to site
+   
     await page.goto("https://demowebshop.tricentis.com/", {
       waitUntil: "domcontentloaded",
       timeout: 60000,
