@@ -2,7 +2,6 @@ import { test, expect } from "@playwright/test";
 
 test.describe("Invalid Login Scenarios", () => {
   test("Invalid login with wrong email shows validation error", async ({ page }) => {
-    // Step 1: Navigate to site
     await page.goto("https://demowebshop.tricentis.com/", {
       waitUntil: "domcontentloaded",
       timeout: 60000,
